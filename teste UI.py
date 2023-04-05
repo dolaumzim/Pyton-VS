@@ -1,11 +1,14 @@
 import math
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
+import tkinter as tk
+
 def get_height():
     height = float(ENTRY2.get())
     return height
-def get_grid():
-    grid = float(ENTRY1.get())
+def get_grid(en):
+    grid = en
     return grid
 def calculate_bmi(): 
     try:
@@ -20,12 +23,16 @@ def calculate_bmi():
     else:
         messagebox.showinfo("Your BMI Calculated is : ", bmi)
 
-def open_popup():
-    top= Toplevel(TOP)
-    top.geometry("250x250")
-    top.title("Child Window")
-    Label(top, text= "Hello World!", font=('Mistral 18 bold')).place(x=150,y=80)
-    
+def popupBonus():   #novopopup para tentar pegar o valor de getgrid
+    popupBonusWindow = tk.Toplevel()
+    popupBonusWindow.wm_title("Window")
+    labelBonus = tk.Label(popupBonusWindow, text="Input")
+    labelBonus.grid(row=0, column=0)
+    ENTRY1 = ttk.Entry(popupBonusWindow, width=5, font="Roboto 11")
+    ENTRY1.place(x=15, y=0) #input para o tamanho do grid
+    B1 = ttk.Button(popupBonusWindow, text="Okay", command=(popupBonusWindow.destroy))
+    B1.grid(row=1, column=0)
+
 
 if __name__ == '__main__':
     TOP = Tk()
@@ -40,8 +47,13 @@ if __name__ == '__main__':
 
 
     #n_groups = int(input())
-    n_groups = 9        # trocar por get_grid de alguma forma
+    if popupBonus == TRUE :
+        n_groups = 16
+    else :
+        n_groups = 9        # trocar por get_grid de alguma
     n_input_numbers = n_groups
+
+
 
     n_sqrt = math.sqrt(n_groups)
 
@@ -94,15 +106,14 @@ if __name__ == '__main__':
                 # [9, 0, 3, 0, 0, 0, 6, 0, 4]
 
 
-    ENTRY1 = Entry(TOP, bd=2, width=5, font="Roboto 11")
-    ENTRY1.place(x=100, y=500) #input para o tamanho do grid
 
-    BUTTON = Button(bg="#000000",fg='#ffffff', bd=2, text="GRID", padx=2, pady=2, command=get_grid,
-                    font=("Helvetica", 8, "bold"))
-    BUTTON.grid(row=5, column=0, sticky=W)
-    BUTTON.place(x=150, y=500)
 
-    BUTTON = Button(bg="#000000",fg='#ffffff', bd=12, text="CHECK", padx=33, pady=10, command=open_popup,
+    # BUTTON = Button(bg="#000000",fg='#ffffff', bd=2, text="GRID", padx=2, pady=2, command=get_grid,
+    #                 font=("Helvetica", 8, "bold"))
+    # BUTTON.grid(row=5, column=0, sticky=W)
+    # BUTTON.place(x=150, y=500)
+
+    BUTTON = Button(bg="#000000",fg='#ffffff', bd=12, text="CHECK", padx=33, pady=10, command=popupBonus,
                     font=("Helvetica", 20, "bold"))
     BUTTON.grid(row=5, column=0, sticky=W)
     BUTTON.place(x=100, y=400)
